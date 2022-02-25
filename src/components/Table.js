@@ -1,8 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import MyContext from '../context/index';
 
 function Table() {
-  const { planets } = useContext(MyContext);
+  const { planets, filter } = useContext(MyContext);
+  const [filterPlanetsName, setFilterPlanetsName] = useState([]);
+
+  useEffect(() => {
+    const filterNames = planets.filter((planet) => (
+      planet.name.includes(filter.filterByName.name)));
+    setFilterPlanetsName(filterNames);
+  }, [planets, filter]);
 
   return (
     // Table Source: https://www.w3schools.com/tags/tag_thead.asp
@@ -25,22 +32,23 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        { planets.map((planet) => (
+        { filterPlanetsName.map((planet) => (
           <tr key={ planet.name }>
-            <td>{planet.name}</td>
-            <td>{planet.climate}</td>
-            <td>{planet.created}</td>
-            <td>{planet.diameter}</td>
-            <td>{planet.edited}</td>
-            <td>{planet.filmes}</td>
-            <td>{planet.gravity}</td>
-            <td>{planet.orbital_period}</td>
-            <td>{planet.population}</td>
-            <td>{planet.rotation_period}</td>
-            <td>{planet.surface_water}</td>
-            <td>{planet.terrain}</td>
-            <td>{planet.url}</td>
+            <td>{ planet.name }</td>
+            <td>{ planet.climate }</td>
+            <td>{ planet.created }</td>
+            <td>{ planet.diameter }</td>
+            <td>{ planet.edited }</td>
+            <td>{ planet.filmes }</td>
+            <td>{ planet.gravity }</td>
+            <td>{ planet.orbital_period }</td>
+            <td>{ planet.population }</td>
+            <td>{ planet.rotation_period }</td>
+            <td>{ planet.surface_water }</td>
+            <td>{ planet.terrain }</td>
+            <td>{ planet.url }</td>
           </tr>
+          // Estipulando quais serão as rolls, atende-se o requisito 1 de excluir a coluna residents.
         )) }
       </tbody>
     </table>
