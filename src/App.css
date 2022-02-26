@@ -14,7 +14,7 @@
   }
 }
 
-.App-header {
+/* .App-header {
   align-items: center;
   background-color: #282c34;
   color: white;
@@ -23,7 +23,7 @@
   font-size: calc(10px + 2vmin);
   justify-content: center;
   min-height: 100vh;
-}
+} */
 
 .App-link {
   color: #61dafb;
@@ -38,4 +38,16 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+  background-color: black;
+  color: white;
+}
+
+body div {
+  display: flex;
+  flex-direction: column;
+  height: 900px;
+  padding: 5px;
 }
