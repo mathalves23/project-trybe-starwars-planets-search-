@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import MyContext from '../context/index';
 
 function FilterForm() {
-  const { setFilter } = useContext(MyContext);
+  const { setFilter, selectedFilter } = useContext(MyContext);
   const columns = [
     'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water']; // Colunas dada pelo README.
   const comparisonFilter = ['maior que', 'menor que', 'igual a']; // Filtros de comparação.
@@ -29,9 +29,11 @@ function FilterForm() {
           id="column-filter"
           onChange={ ({ target }) => setInputColumn(target.value) } // Vai pegar o valor escolhido da coluna.
         >
-          { columns.map((option) => (
-            <option key={ option }>{ option }</option>
-          )) }
+          { columns.filter((eachColumn) => !selectedFilter.filterByNumericValues
+            .some((eachFilter) => eachColumn === eachFilter.column))
+            .map((option) => (
+              <option key={ option }>{ option }</option>
+            )) }
         </select>
       </label>
 

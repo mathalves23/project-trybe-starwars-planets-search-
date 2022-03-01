@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import MyContext from '../context/index';
 
 function Table() {
-  const { planets, filter } = useContext(MyContext);
+  const { planets, selectedFilter } = useContext(MyContext);
   const [filterPlanetsName, setFilterPlanetsName] = useState([]);
 
   // Filtragem numérica
@@ -22,11 +22,11 @@ function Table() {
   // Filtragem por nome
   useEffect(() => {
     const filterNames = planets.filter((planet) => (
-      planet.name.includes(filter.filterByName.name)
-        && filter.filterByNumericValues
+      planet.name.includes(selectedFilter.filterByName.name)
+        && selectedFilter.filterByNumericValues
           .every((searchFilter) => numericFilter(planet, searchFilter))));
     setFilterPlanetsName(filterNames);
-  }, [planets, filter]);
+  }, [planets, selectedFilter]);
 
   return (
     // Table Source: https://www.w3schools.com/tags/tag_thead.asp

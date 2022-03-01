@@ -5,7 +5,7 @@ import MyContext from './index';
 
 function Provider({ children }) {
   const [planets, setPlanets] = useState([]);
-  const [filter, setFilter] = useState({
+  const [selectedFilter, setFilter] = useState({
     filterByName: { name: '' },
     filterByNumericValues: [] });
   // Lógica realizada com ajuda da mentoria de revisão do Rod do dia 24/02.
@@ -25,7 +25,7 @@ function Provider({ children }) {
   }
 
   return (
-    <MyContext.Provider value={ { planets, searchName, filter, setFilter } }>
+    <MyContext.Provider value={ { planets, searchName, selectedFilter, setFilter } }>
       {children}
     </MyContext.Provider>
   );
