@@ -5,9 +5,26 @@ function Table() {
   const { planets, filter } = useContext(MyContext);
   const [filterPlanetsName, setFilterPlanetsName] = useState([]);
 
+  // Filtragem numérica
+  const numericFilter = (planet, filterByNumValue) => {
+    const { columns, comparisonFilter, value } = filterByNumValue;
+    if (comparisonFilter === 'maior que') {
+      return Number(planet[columns]) > Number(value);
+    }
+    if (comparisonFilter === 'menor que') {
+      return Number(planet[columns]) < Number(value);
+    }
+    if (comparisonFilter === 'igual a') {
+      return Number(planet[columns]) === Number(value);
+    }
+  };
+
+  // Filtragem por nome
   useEffect(() => {
     const filterNames = planets.filter((planet) => (
-      planet.name.includes(filter.filterByName.name)));
+      planet.name.includes(filter.filterByName.name)
+        && filter.filterByNumericValues
+          .every((searchFilter) => numericFilter(planet, searchFilter))));
     setFilterPlanetsName(filterNames);
   }, [planets, filter]);
 
@@ -31,6 +48,7 @@ function Table() {
           <th>URL</th>
         </tr>
       </thead>
+
       <tbody>
         { filterPlanetsName.map((planet) => (
           <tr key={ planet.name }>

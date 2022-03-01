@@ -4,6 +4,7 @@ import Background from './images/background.jpg';
 import Provider from './context/Provider';
 import Table from './components/Table';
 import Search from './components/Search';
+import FilterForm from './components/FilterForm';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <h1> Star Wars Planets Search </h1>
       <Provider>
         <Search />
+        <FilterForm />
         <Table />
       </Provider>
     </div>
